@@ -1,0 +1,201 @@
+body {
+	grid-template-areas: /* 12 * 6 */
+	"h h h h h h h h h h h n"
+	"m m m m m m m m m m m n"
+	"m m m m m m m m m m m n"
+	"m m m m m m m m m m m n"
+	"m m m m m m m m m m m n"
+	"f f f f f f f f f f f n"
+	;
+}
+
+/* Header */
+
+header {
+	grid-area: h;
+	/* Flex */
+	display: inline-flex;
+	justify-content: space-between;
+	flex-flow: row wrap;
+	/* Aesthethic */
+	background-image: linear-gradient(160deg, var(--mainorange), var(--mainpink));
+	/* Boxing */
+	border-radius: 1.6rem;
+	margin: 1rem;
+	padding: 1rem;
+	min-height: 10rem;
+	max-height: 16rem;
+}
+
+header > div {
+	display: inline-flex;
+	flex-flow: row nowrap;
+	align-items: center;
+	flex-shrink: 2;
+}
+
+/* Main */
+
+main {
+	/* Grid */
+	grid-area: m;
+	display: grid;
+	grid-template-areas: "i" "s";
+	/* Aesthethic */
+	background-image: radial-gradient(var(--lightorange), var(--strongorange));
+	/* Box */
+	border-radius: 1rem;
+	margin: 1rem;
+	padding: 1rem;
+	text-align: center;
+}
+
+#intro {
+	grid-area: i;
+	/* Box */
+	margin: 1rem;
+	padding: 1rem;
+}
+
+#stats {
+	grid-area: s;
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	/* Box */
+	margin: 1rem;
+	padding: 1rem;
+	/* Aesthethic */
+	font-weight: bold;
+}
+
+#stats > div {
+	display: inline-flex;
+	flex-flow: column nowrap;
+	justify-content: flex-start;
+	align-items: flex-start;
+	/* Aesthethic */
+	background-color: aliceblue;
+	/* Box */
+	border: 0.3rem solid green;
+	border-radius: 1rem;
+	margin: 1rem;
+	padding: 1rem;
+	height: 12rem;
+}
+
+#stats > div > div {
+	display: inline-flex;
+	flex-flow: row nowrap;
+	justify-content: space-between;
+	align-items: center;
+	/* Aesthethic */
+	border: 0.1rem solid lightgreen;
+	margin: 0rem;
+	padding: 0rem 1rem;
+	height: 4.8rem;
+	width: 90%;
+}
+
+
+/* Nav */
+
+nav {
+	/* Display */
+	grid-area: n;
+	display: inline-flex;
+	position: sticky;
+	flex-flow: column nowrap;
+	align-items: center;
+	text-align: center;
+	/* Aesthethic */
+	background-color: aliceblue;
+	/* Box */
+	border: 0.3rem solid lightcoral;
+	border-radius: 1rem;
+	margin: 1rem;
+	padding: 1rem;
+	/* Size */
+	max-width: 16rem;
+}
+
+nav div {
+	/* Display */
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	/* Boxing */
+	border-radius: 1rem;
+	margin: 1.6rem; /* Top + Bottom - Left + Right*/
+	padding: 1rem;
+
+	width: 10.8rem;
+	height: 4.8rem;
+	/* Aesthethic */
+	background-color: lightcoral;
+	transition-duration: 250ms;
+	transition-timing-function: ease-out, ease;
+}
+
+nav div:hover {
+	/* Boxing */
+	margin: 1rem;
+	padding: 1.6rem;
+	background-color: var(--lightorange);
+}
+
+
+/* Footer */
+
+footer {
+	grid-area: f;
+	/* Flex */
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	flex-flow: column nowrap;
+	/* Aesthethic */
+	background-color: royalblue;
+	/* Box */
+	border: 0.3rem solid royalblue;
+	border-radius: 1rem;
+	margin: 1rem;
+	padding: 1rem;
+}
+
+/* Elements */
+
+
+section > div {
+	display: inline-flex;
+	flex-flow: column wrap;
+	justify-content: flex-start;
+	align-items: flex-start;
+	/* Aesthethic */
+	background-color: aliceblue;
+	/* Box */
+	border: 0.3rem solid green;
+	border-radius: 1rem;
+	margin: 1rem;
+	padding: 1rem;
+	height: 12rem;
+}
+
+section > div > div {
+	display: inline-flex;
+	flex-flow: row nowrap;
+	justify-content: space-between;
+	align-items: center;
+	/* Aesthethic */
+	border: 0.1rem solid var(--lightorange);
+	margin: 0rem;
+	padding: 0rem 1rem;
+	height: 4.8rem;
+	width: 90%;
+}
+
+
+/* Classes */
+
+#log-out {
+	background-color: lightcoral;
+}
