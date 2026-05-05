@@ -177,6 +177,23 @@ nav div {
 	transition-timing-function: ease-out, ease;
 }
 
+/* ul */
+.services {
+	margin: 40px 0px;
+	text-align: start;
+}
+
+.services li {
+	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+	font-size: 24px;
+	list-style: none;
+}
+
+/* Titles Fonts */
+.title-font {
+	font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+} 
+
 /* Footer */
 
 footer {
