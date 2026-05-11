@@ -22,4 +22,3 @@ Entre sus características encontrarás:
 ## v0.0.6.1 (Beta) - 10/Mayo/2026
 
 - Fusión de *UpdateLog.md* con *README.md*.git add .
-git co
