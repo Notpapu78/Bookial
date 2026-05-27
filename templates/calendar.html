@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}Calendario{% endblock %}
+
+{% block extra_css %}
+<link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css' rel='stylesheet' />
+{% endblock %}
+
+{% block content %}
+<h1><i class="bi bi-calendar"></i> Calendario de Devoluciones</h1>
+<p>Fechas de devolución de tus libros prestados</p>
+
+<div id="calendar"></div>
+
+<script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js'></script>
+<script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/locales/es.js'></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const calendarEl = document.getElementById('calendar');
+    const calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth',
+        locale: 'es',
+        headerToolbar: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'dayGridMonth,timeGridWeek,listMonth'
+        },
+        events: '/api/calendar',
+        eventClick: function(info) {
+            alert('Debes devolver: ' + info.event.title);
+        }
+    });
+    calendar.render();
+});
+</script>
+{% endblock %}

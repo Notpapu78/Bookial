@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}Biblioteca{% endblock %}
+
+{% block content %}
+<h1><i class="bi bi-book"></i> Biblioteca Digital</h1>
+
+<div class="search-filters">
+    <form method="GET" action="{{ url_for('library') }}" class="search-form">
+        <input type="text" name="search" placeholder="Buscar libros..." value="{{ search }}">
+        <button type="submit"><i class="bi bi-search"></i> Buscar</button>
+    </form>
+    
+    <div class="categories">
+        <a href="{{ url_for('library') }}" class="category-tag">Todos</a>
+        {% for cat in categorias %}
+            <a href="{{ url_for('library', categoria=cat[0]) }}" class="category-tag">{{ cat[0] }}</a>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="books-grid">
+    {% for libro in libros %}
+    <div class="book-card">
+        <div class="book-cover">
+            <i class="bi bi-book-half"></i>
+        </div>
+        <h3>{{ libro.titulo }}</h3>
+        <p>{{ libro.autor }}</p>
+        <p class="book-category"><i class="bi bi-tag"></i> {{ libro.categoria }}</p>
+        <p><strong>Disponibles:</strong> {{ libro.disponibles }}/{{ libro.total }}</p>
+        <a href="{{ url_for('book_detail', book_id=libro.id) }}" class="btn-small">Ver detalles</a>
+    </div>
+    {% else %}
+    <p>No se encontraron libros.</p>
+    {% endfor %}
+</div>
+{% endblock %}

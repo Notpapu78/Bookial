@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block title %}Mi Dashboard{% endblock %}
+
+{% block content %}
+<h1><i class="bi bi-grid"></i> Bienvenido, {{ current_user.nombre }}</h1>
+
+<div class="stats-cards">
+    <div class="stat-card">
+        <i class="bi bi-journal-bookmark-fill"></i>
+        <h3>Préstamos Activos</h3>
+        <p class="stat-number">{{ prestamos|length }}</p>
+    </div>
+    
+    <div class="stat-card">
+        <i class="bi bi-check-circle-fill"></i>
+        <h3>Libros Leídos</h3>
+        <p class="stat-number">{{ total_leidos }}</p>
+    </div>
+</div>
+
+<section class="active-loans">
+    <h2><i class="bi bi-clock-history"></i> Préstamos Activos</h2>
+    {% if prestamos %}
+        <div class="loans-grid">
+            {% for prestamo in prestamos %}
+            <div class="loan-card">
+                <h3>{{ prestamo.libro.titulo }}</h3>
+                <p><strong>Autor:</strong> {{ prestamo.libro.autor }}</p>
+                <p><strong>Fecha préstamo:</strong> {{ prestamo.fecha_prestamo.strftime('%d/%m/%Y') }}</p>
+                <p><strong>Devolver antes:</strong> {{ prestamo.fecha_devolucion.strftime('%d/%m/%Y') }}</p>
+                {% if prestamo.fecha_devolucion < now %}
+                    <p class="text-danger"><i class="bi bi-exclamation-triangle"></i> ¡VENCIDO!</p>
+                {% endif %}
+                <div class="loan-actions">
+                    <a href="{{ url_for('read_book', book_id=prestamo.libro.id) }}" class="btn-small">📖 Leer</a>
+                    <a href="{{ url_for('return_book', prestamo_id=prestamo.id) }}" class="btn-small btn-danger" onclick="return confirm('¿Devolver libro?')">↩️ Devolver</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>No tienes libros prestados actualmente. <a href="{{ url_for('library') }}">Explora la biblioteca</a></p>
+    {% endif %}
+</section>
+
+<section class="recommended">
+    <h2><i class="bi bi-stars"></i> Libros Recomendados</h2>
+    <div class="books-grid">
+        {% for libro in recomendados %}
+        <div class="book-card">
+            <h3>{{ libro.titulo }}</h3>
+            <p>{{ libro.autor }}</p>
+            <a href="{{ url_for('book_detail', book_id=libro.id) }}" class="btn-small">Ver detalles</a>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

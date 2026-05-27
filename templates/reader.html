@@ -1,0 +1,267 @@
+{% extends "base.html" %}
+
+{% block title %}Leyendo: {{ libro.titulo }}{% endblock %}
+
+{% block extra_css %}
+<style>
+    .reader-container {
+        background: white;
+        padding: 30px;
+        border-radius: 15px;
+        min-height: 60vh;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    }
+    .reader-header {
+        border-bottom: 2px solid var(--mainorange);
+        padding-bottom: 15px;
+        margin-bottom: 20px;
+    }
+    .reader-controls {
+        position: sticky;
+        top: 0;
+        background: var(--lightorange);
+        padding: 15px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        display: flex;
+        gap: 15px;
+        justify-content: center;
+        flex-wrap: wrap;
+        z-index: 10;
+    }
+    .book-content {
+        font-size: 1.2rem;
+        line-height: 1.8;
+        text-align: justify;
+        padding: 20px;
+        background: #fafafa;
+        border-radius: 10px;
+        min-height: 500px;
+    }
+    .btn-reader {
+        padding: 8px 20px;
+        background: var(--mainpink);
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+    .btn-reader:hover {
+        background: var(--strongorange);
+        transform: scale(1.05);
+    }
+    .progress-saved {
+        position: fixed;
+        bottom: 20px;
+        right: 260px;
+        background: #28a745;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        display: none;
+        z-index: 100;
+    }
+    @media (max-width: 768px) {
+        .progress-saved { right: 200px; }
+    }
+    .page-info {
+        background: white;
+        padding: 5px 15px;
+        border-radius: 5px;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="reader-container">
+    <div class="reader-header">
+        <h1><i class="bi bi-book"></i> {{ libro.titulo }}</h1>
+        <h3>{{ libro.autor }}</h3>
+    </div>
+    
+    <div class="reader-controls">
+        <button class="btn-reader" id="prev-page">
+            <i class="bi bi-chevron-left"></i> Anterior
+        </button>
+        <span class="page-info">
+            Página <span id="current-page">1</span> 
+            de <span id="total-pages">10</span>
+        </span>
+        <button class="btn-reader" id="next-page">
+            Siguiente <i class="bi bi-chevron-right"></i>
+        </button>
+        <button class="btn-reader" id="save-progress">
+            <i class="bi bi-save"></i> Guardar
+        </button>
+    </div>
+    
+    <div id="book-content" class="book-content">
+        <div style="text-align: center; padding: 50px;">
+            <i class="bi bi-journal-bookmark-fill" style="font-size: 64px; color: var(--mainorange);"></i>
+            <h3 style="margin-top: 20px;">Contenido del libro: "{{ libro.titulo }}"</h3>
+            <p style="margin-top: 20px;">{{ libro.descripcion or 'Sin descripción disponible' }}</p>
+            <hr style="margin: 30px 0;">
+            <p>📖 En la versión completa de Bookial, aquí se mostraría el contenido del libro en formato PDF.</p>
+            <p>Por ahora, puedes practicar la navegación y guardar tu progreso.</p>
+        </div>
+    </div>
+    
+    <div id="progress-saved" class="progress-saved">
+        <i class="bi bi-check-circle"></i> Progreso guardado
+    </div>
+</div>
+
+<script>
+// Obtener el progreso guardado del servidor
+let currentPage = {{ progreso.pagina if progreso else 1 }};
+let totalPages = 10; // Simulamos 10 páginas
+
+// Elementos del DOM
+const currentPageSpan = document.getElementById('current-page');
+const totalPagesSpan = document.getElementById('total-pages');
+const prevBtn = document.getElementById('prev-page');
+const nextBtn = document.getElementById('next-page');
+const saveBtn = document.getElementById('save-progress');
+const bookContent = document.getElementById('book-content');
+const progressSaved = document.getElementById('progress-saved');
+
+// Contenido de ejemplo por páginas
+const chapters = [
+    {
+        title: "Capítulo 1: El Comienzo",
+        content: "Era una noche oscura y tormentosa cuando todo comenzó. Las gotas de lluvia golpeaban insistentemente contra la ventana, mientras yo me preguntaba qué me depararía el destino. Había leído muchos libros en mi vida, pero ninguno me había preparado para lo que estaba por venir. La biblioteca, ese lugar mágico donde los sueños se encuentran con la realidad, estaba a punto de cambiar mi vida para siempre."
+    },
+    {
+        title: "Capítulo 2: El Descubrimiento",
+        content: "Entre los estantes polvorientos, encontré un libro que parecía brillar con luz propia. Sus páginas amarillentas contenían historias que jamás imaginé. Cada palabra era un portal a mundos desconocidos, cada frase una aventura nueva. Me senté en el rincón más acogedor de la biblioteca y comencé a leer sin parar, sumergiéndome en un océano de conocimiento y fantasía."
+    },
+    {
+        title: "Capítulo 3: La Aventura",
+        content: "Las páginas pasaban como hojas en otoño. Cada capítulo era una nueva experiencia, cada personaje se convertía en un amigo. Reí, lloré, sentí miedo y emoción. El libro me estaba enseñando lecciones valiosas sobre la vida, el amor y la amistad. Nunca imaginé que unas simples palabras en papel pudieran tener tanto poder transformador."
+    },
+    {
+        title: "Capítulo 4: El Desafío",
+        content: "Justo cuando creía haber entendido todo, apareció un giro inesperado en la trama. El protagonista debía tomar decisiones difíciles que pondrían a prueba sus valores y convicciones. Me vi reflejado en sus dudas y temores. ¿Qué habría hecho yo en su lugar? Esa pregunta me acompañó durante días, demostrándome que los buenos libros no solo entretienen, también hacen reflexionar."
+    },
+    {
+        title: "Capítulo 5: El Clímax",
+        content: "La historia alcanzó su punto más álgido. Todo lo que había leído hasta ahora convergía en un momento decisivo. Las emociones estaban a flor de piel, y no podía dejar de leer. El destino de los personajes pendía de un hilo, y yo, como lector, me sentía parte de su viaje. Esta era la magia de la lectura: sentir que uno también es protagonista."
+    },
+    {
+        title: "Capítulo 6: La Reflexión",
+        content: "Después de la tormenta, llegó la calma. Los personajes reflexionaban sobre sus acciones y decisiones. Era un momento para pensar en lo aprendido, en cómo habían crecido a lo largo de la historia. Me tomé un descanso para procesar todo lo que había leído, para disfrutar del viaje antes de llegar al destino final."
+    },
+    {
+        title: "Capítulo 7: El Reencuentro",
+        content: "Los caminos de los personajes se cruzaron nuevamente. Algunos traían consigo sabiduría adquirida, otros cargaban el peso de sus errores. Pero todos habían cambiado, todos habían evolucionado. Como en la vida real, cada experiencia nos transforma y nos hace crecer, para bien o para mal."
+    },
+    {
+        title: "Capítulo 8: El Desenlace",
+        content: "Todo tiene un final, y este libro no era la excepción. Los hilos de la historia se iban cerrando uno a uno, las preguntas encontraban respuesta, los misterios se resolvían. Pero lo más hermoso era saber que, aunque el libro terminara, las enseñanzas quedarían conmigo para siempre."
+    },
+    {
+        title: "Epílogo: Un Nuevo Comienzo",
+        content: "Cerré el libro con una sonrisa en el rostro y una sensación de gratitud en el corazón. La lectura había sido un viaje maravilloso, y aunque había terminado, sabía que volvería a leerlo en el futuro. Porque los buenos libros son como los buenos amigos: siempre están ahí cuando los necesitas."
+    },
+    {
+        title: "Reflexiones Finales",
+        content: "Este libro me enseñó que la lectura es mucho más que pasar páginas. Es conectar con otras mentes, explorar nuevos mundos, vivir vidas que no son la nuestra. Cada libro es una puerta a la aventura, una ventana al conocimiento, un espejo del alma. ¡Gracias por acompañarme en esta lectura! Recuerda: el mejor libro es el que aún no has leído."
+    }
+];
+
+// Mostrar página actual
+function displayPage() {
+    currentPageSpan.textContent = currentPage;
+    totalPagesSpan.textContent = totalPages;
+    
+    // Mostrar contenido de la página actual
+    const pageContent = chapters[currentPage - 1];
+    if (pageContent) {
+        bookContent.innerHTML = `
+            <div style="padding: 30px;">
+                <h2 style="color: var(--mainpink); margin-bottom: 20px;">${pageContent.title}</h2>
+                <p style="font-size: 1.1rem; line-height: 1.8;">${pageContent.content}</p>
+                <hr style="margin: 30px 0;">
+                <div style="display: flex; justify-content: space-between; color: #666; font-size: 0.9rem;">
+                    <span><i class="bi bi-bookmark"></i> Página ${currentPage} de ${totalPages}</span>
+                    <span><i class="bi bi-clock"></i> Progreso: ${Math.round((currentPage/totalPages)*100)}%</span>
+                </div>
+                <div style="margin-top: 20px; padding: 10px; background: #f0f0f0; border-radius: 5px; text-align: center;">
+                    <small><i class="bi bi-info-circle"></i> Usa los botones o las flechas ← → del teclado para navegar</small>
+                </div>
+            </div>
+        `;
+    }
+}
+
+// Guardar progreso en el servidor
+function saveProgress() {
+    fetch('/api/save_progress/{{ libro.id }}', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ page: currentPage })
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Mostrar mensaje de éxito
+        progressSaved.style.display = 'block';
+        setTimeout(() => {
+            progressSaved.style.display = 'none';
+        }, 2000);
+        console.log('Progreso guardado en página:', currentPage);
+    })
+    .catch(error => {
+        console.error('Error al guardar:', error);
+    });
+}
+
+// Siguiente página
+function nextPage() {
+    if (currentPage < totalPages) {
+        currentPage++;
+        displayPage();
+        saveProgress();
+    } else {
+        alert('🎉 ¡Felicidades! Has completado este libro. ¿Por qué no exploras otros títulos en la biblioteca?');
+    }
+}
+
+// Página anterior
+function prevPage() {
+    if (currentPage > 1) {
+        currentPage--;
+        displayPage();
+        saveProgress();
+    }
+}
+
+// Event listeners
+if (nextBtn) nextBtn.addEventListener('click', nextPage);
+if (prevBtn) prevBtn.addEventListener('click', prevPage);
+if (saveBtn) saveBtn.addEventListener('click', saveProgress);
+
+// Teclado
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight') nextPage();
+    if (e.key === 'ArrowLeft') prevPage();
+    if (e.key === 's' || e.key === 'S') {
+        e.preventDefault();
+        saveProgress();
+    }
+});
+
+// Inicializar
+displayPage();
+
+// Guardar progreso al salir de la página
+window.addEventListener('beforeunload', () => {
+    saveProgress();
+});
+</script>
+{% endblock %}

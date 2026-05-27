@@ -1,0 +1,17 @@
+#intro { text-align: center; margin-bottom: 40px; }
+#stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin: 30px 0; }
+#stats > div { background: white; padding: 20px; border-radius: 10px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+#stats i { font-size: 32px; color: var(--mainpink); }
+
+.services li { list-style: none; margin: 10px 0; font-size: 16px; }
+
+.search-filters { background: white; padding: 20px; border-radius: 10px; margin-bottom: 20px; }
+.search-form { display: flex; gap: 10px; margin-bottom: 15px; }
+.search-form input { flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 5px; }
+.categories { display: flex; flex-wrap: wrap; gap: 10px; }
+.category-tag { padding: 5px 15px; background: var(--lightorange); border-radius: 20px; text-decoration: none; color: #333; }
+.category-tag:hover { background: var(--mainpink); color: white; }
+
+.book-detail { background: white; padding: 30px; border-radius: 10px; }
+.book-meta { display: flex; gap: 20px; margin: 20px 0; color: #666; }
+.book-actions { display: flex; gap: 15px; margin-top: 30px; }
