@@ -127,7 +127,6 @@ nav div {
 	border-radius: 1rem;
 	margin: 1.6rem; /* Top + Bottom - Left + Right*/
 	padding: 1rem;
-
 	width: 10.8rem;
 	height: 4.8rem;
 	/* Aesthethic */
@@ -142,7 +141,6 @@ nav div:hover {
 	padding: 1.6rem;
 	background-color: var(--lightorange);
 }
-
 
 /* Footer */
 
@@ -163,7 +161,6 @@ footer {
 }
 
 /* Elements */
-
 
 section > div {
 	display: inline-flex;
@@ -192,7 +189,6 @@ section > div > div {
 	height: 4.8rem;
 	width: 90%;
 }
-
 
 /* Classes */
 

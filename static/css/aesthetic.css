@@ -20,6 +20,47 @@ body {
     min-height: 100vh;
 }
 
+.auth-container {
+    width: max-content;
+	margin: auto;
+	background-color: white;
+    padding: 2.5%;
+    filter: drop-shadow(0 2px 5px #0000001a);
+    border-radius: 10px;
+}
+
+form {
+    padding-top: 2.5%;
+    padding-bottom: 5%;
+}
+
+form div {
+    padding-top: 2.5%;
+    padding-bottom: 2.5%;
+}
+
+.auth-box h2 {
+    font-size: 3vh;
+    color: var(--mainpink);
+}
+
+.auth-container .auth-box p, form div label, input, select {
+    font-size: 1.7vh;
+    color: var(--lightpink);
+}
+
+.auth-link a:link {
+    color: var(--mainpink);
+}
+
+.auth-link a:hover {
+    color: var(--lightpink);
+}
+
+.auth-link a:active {
+    color: var(--strongorange);
+}
+
 /* Alertas */
 .alert {
     padding: 12px 20px;
@@ -67,6 +108,7 @@ body {
 .btn-primary {
     background: var(--mainpink);
     color: white;
+    margin-top: 2.5%;
 }
 
 .btn-primary:hover {

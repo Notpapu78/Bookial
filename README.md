@@ -22,6 +22,7 @@ Entre sus características encontrarás:
   - [v0.0.6.1 (Beta) - 10/Mayo/2026](#v0061-beta---10mayo2026)
   - [v0.1 (Beta) - 27/Mayo/2026](#v01-beta---27mayo2026)
   - [v0.1.0.1 (Beta) - 28/Mayo/2026](#v0101-beta---28mayo2026)
+  - [v0.1.0.2 (Beta) - 01/Junio/2026](#v0102-beta---01junio2026)
 
 ***
 
@@ -53,3 +54,9 @@ Versión inicial de Bookial - Biblioteca Digital
 ## v0.1.0.1 (Beta) - 28/Mayo/2026
 
 - Simplemente agregar lo que mi compañero hizo ayer aquí.
+
+## v0.1.0.2 (Beta) - 01/Junio/2026
+
+- Mejoras de diseño
+  - Mejora de diseño en pestañas de inicio de sesión y de registro.
+  - Cambio de "inicio de sesión", "registro" y "cerrar sesion" a "Log In", "Sign In" y Log Out, respectivamente.
