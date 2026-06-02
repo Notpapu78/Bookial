@@ -15,14 +15,15 @@ Entre sus características encontrarás:
 # 2. TABLA DE CONTENIDOS
 
 - [1. Bookial](#1-bookial)
-  - [Tu organizacion es nuestra prioridad](#tu-organizacion-es-nuestra-prioridad)
+	- [Tu organizacion es nuestra prioridad](#tu-organizacion-es-nuestra-prioridad)
 - [2. TABLA DE CONTENIDOS](#2-tabla-de-contenidos)
 - [3. LOG DE VERSIONES](#3-log-de-versiones)
-  - [v0.0.6 (Beta) - 05/Mayo/2026](#v006-beta---05mayo2026)
-  - [v0.0.6.1 (Beta) - 10/Mayo/2026](#v0061-beta---10mayo2026)
-  - [v0.1 (Beta) - 27/Mayo/2026](#v01-beta---27mayo2026)
-  - [v0.1.0.1 (Beta) - 28/Mayo/2026](#v0101-beta---28mayo2026)
-  - [v0.1.0.2 (Beta) - 01/Junio/2026](#v0102-beta---01junio2026)
+	- [v0.0.6 (Beta) - 05/Mayo/2026](#v006-beta---05mayo2026)
+	- [v0.0.6.1 (Beta) - 10/Mayo/2026](#v0061-beta---10mayo2026)
+	- [v0.1 (Beta) - 27/Mayo/2026](#v01-beta---27mayo2026)
+	- [v0.1.0.1 (Beta) - 28/Mayo/2026](#v0101-beta---28mayo2026)
+	- [v0.1.0.2 (Beta) - 01/Junio/2026](#v0102-beta---01junio2026)
+	- [v.0.1.0.3 (Beta) - 02/Junio/2026](#v0103-beta---02junio2026)
 
 ***
 
@@ -39,17 +40,17 @@ Entre sus características encontrarás:
 
 ## v0.1 (Beta) - 27/Mayo/2026
 
-Versión inicial de Bookial - Biblioteca Digital
-- Sistema completo de gestión de biblioteca digital
-- Autenticación de usuarios (registro/login)
-- Catálogo de libros con búsqueda y filtros
-- Sistema de préstamos (máximo 3 libros)
-- Lector de libros con guardado de progreso
-- Calendario de devoluciones
-- Dashboard personal con estadísticas
-- Diseño responsive con CSS personalizado
-- Base de datos SQLite (migrable a PostgreSQL)
-- *(Nota adicional de Saray)* Desde ahora también usaremos Flask y Python como agregados al sistema actual.
+- Versión inicial de Bookial - Biblioteca Digital
+	- Sistema completo de gestión de biblioteca digital
+	- Autenticación de usuarios (registro/login)
+	- Catálogo de libros con búsqueda y filtros
+	- Sistema de préstamos (máximo 3 libros)
+	- Lector de libros con guardado de progreso
+	- Calendario de devoluciones
+	- Dashboard personal con estadísticas
+	- Diseño responsive con CSS personalizado
+	- Base de datos SQLite (migrable a PostgreSQL)
+	- *(Nota adicional de Saray)* Desde ahora también usaremos Flask y Python como agregados al sistema actual.
 
 ## v0.1.0.1 (Beta) - 28/Mayo/2026
 
@@ -58,5 +59,10 @@ Versión inicial de Bookial - Biblioteca Digital
 ## v0.1.0.2 (Beta) - 01/Junio/2026
 
 - Mejoras de diseño
-  - Mejora de diseño en pestañas de inicio de sesión y de registro.
-  - Cambio de "inicio de sesión", "registro" y "cerrar sesion" a "Log In", "Sign In" y Log Out, respectivamente.
+	- Mejora de diseño en pestañas de inicio de sesión y de registro.
+	- Cambio de "inicio de sesión", "registro" y "cerrar sesion" a "Log In", "Sign In" y Log Out, respectivamente.
+
+## v.0.1.0.3 (Beta) - 02/Junio/2026
+- Agregamos correo oficial de Bookial.
+- Ajuste menor de tabulaciones en [v0.1 (Beta) - 27/Mayo/2026](#v01-beta---27mayo2026).
+- Ajustes menores de tabulaciones.
